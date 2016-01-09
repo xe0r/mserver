@@ -7,6 +7,14 @@
     }
   }
 
+  function clamp(v, min, max) {
+    if (v < min)
+      return min;
+    if (v > max)
+      return max;
+    return v;
+  }
+
   function HomeMediaPlayer(node) {
     this.len = 0;
     this.filename = "";
@@ -133,6 +141,34 @@
     this.video.addEventListener('timeupdate', function(evt) {
       updatePos();
     }, false);
+
+    var scb = this.controls.querySelector('.sound-control-bar');
+    var scb_ptr = scb.querySelector('div');
+
+    function updateVolume() {
+      scb_ptr.style.left = (parseInt(this.video.volume*scb.offsetWidth)-3)+"px";
+    }
+    updateVolume = updateVolume.bind(this);
+
+    this.video.addEventListener('volumechange', updateVolume, false);
+    updateVolume();
+
+    scb.addEventListener('click', (function(evt) {
+      if (evt.target != scb) {
+        return;
+      }
+      var v = evt.layerX-15;
+      var total = scb.offsetWidth;
+      var r = v / total;
+      this.video.volume = clamp(r, 0.0, 1.0);
+      evt.stopPropagation();
+    }).bind(this), false);
+
+    scb.addEventListener('wheel', (function(evt){
+      this.video.volume = clamp(this.video.volume - evt.deltaY*0.02, 0.0, 1.0);
+      evt.stopPropagation();
+      evt.preventDefault();
+    }).bind(this), false);
 
     this.progress.addEventListener('click', (function(evt) {
       if (this.len == 0) {

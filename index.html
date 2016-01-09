@@ -48,6 +48,11 @@
       cursor: default;
     }
 
+    .player .buttons span {
+      height: 100%;
+      cursor: default;
+    }
+
     #leftbar {
       float:left; 
       width: 20%;
@@ -103,7 +108,14 @@
           <div></div>
         </div>
         <div class="buttons">
-          <div>Play</div>
+          <span style="display:none;">Play</span>
+          <div style="float:right;">
+            <div style="width: 120px; position: relative">
+              <div style="border: solid green 1px; height:7px; margin-top: 8px; margin-bottom: 8px; margin-left: 15px; margin-right: 15px;" class="sound-control-bar">
+                <div style="position: relative; left: -3px; top: -5px; background: white; width: 6px; height: 17px;"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
