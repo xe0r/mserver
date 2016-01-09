@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Video test</title>
+  <script type="text/javascript" src="player.js"></script>
+  <style type="text/css">
+    .player {
+      position: relative; 
+      width: 600px; 
+      height: 300px;
+      background: black;
+      z-index: 4;
+    }
+    .player > video {
+      width: 100%;
+      height: 100%;
+    }
+    .player > .controls {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .player .bottom-controls {
+      position: absolute;
+      bottom: 0px;
+      width: 100%;
+    }
+    .player .progress {
+      width: 100%; 
+      height: 10px; 
+      border: solid white 1px;
+    }
+    .player .progress > div {
+      height: 100%; 
+      width: 0px;
+      background: white;
+    }
+    .player .buttons {
+      width: 100%;
+      height: 25px;
+      color: white;
+      font-family: sans-serif;
+    }
+    .player .buttons div {
+      height: 100%;
+      cursor: default;
+    }
+
+    #leftbar {
+      float:left; 
+      width: 20%;
+      overflow-x: auto;
+      position: fixed;
+      height: 100%;
+      overflow-y: auto;
+    }
+    #leftbar-holder {
+      float:left; 
+      width: 21%; 
+      overflow-x: auto; 
+      height: 100px;
+    }
+    #leftbar div.fileinfo {
+      min-width: 100%;
+      white-space: pre;
+      height: 1.2em;
+      cursor: default;
+      font-family: sans-serif;
+    }
+    #leftbar div.dirinfo {
+      min-width: 100%;
+      white-space: pre;
+      height: 1.2em;
+      cursor: default;
+      font-family: sans-serif;
+      font-weight: bold;
+    }
+    #leftbar div.dircontent {
+      padding-left: 15px;
+    }
+  </style>
+</head>
+<body>
+<div style="float:left; width: 20%; overflow-x: auto; position: fixed; height: 100%; overflow-y: auto;" id="leftbar">
+</div>
+<div style="float:left; width: 21%; overflow-x: auto; height: 100px;" id="leftbar-holder">
+</div>
+<div style="float:left; width: 79%;">
+  <div class="player" id="node">
+    <video></video>
+    <div class="controls" style="">
+      <div class="buttons">
+        <div style="float: right;">
+          <div class="fullscreen">
+            Full
+          </div>
+        </div>
+      </div>
+      <div class="bottom-controls">
+        <div class="progress">
+          <div></div>
+        </div>
+        <div class="buttons">
+          <div>Play</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

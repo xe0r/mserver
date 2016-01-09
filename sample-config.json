@@ -1,0 +1,7 @@
+{
+  "port": 7700,
+  "dirs": [
+    {"name": "D", "path": "D:\\Video"},
+    {"name": "E", "path": "E:\\Video"}
+  ]
+}
