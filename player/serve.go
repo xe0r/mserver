@@ -18,6 +18,8 @@ type Config struct {
 	UseMp4     bool        `json:"use_mp4"`
 	BufferSize int         `json:"buffer_size"`
 	Dirs       []DirConfig `json:"dirs"`
+	Ffmpeg     string      `json:"ffmpeg"`
+	Ffprobe    string      `json:"ffprobe"`
 }
 
 type MediaServer struct {
@@ -79,6 +81,14 @@ func (ms *MediaServer) Serve() error {
 
 	if ms.Config.Port == 0 {
 		ms.Config.Port = 7700
+	}
+
+	if ms.Config.Ffmpeg == "" {
+		ms.Config.Ffmpeg = "ffmpeg"
+	}
+
+	if ms.Config.Ffprobe == "" {
+		ms.Config.Ffmpeg = "ffprobe"
 	}
 
 	ms.srv = &http.Server{

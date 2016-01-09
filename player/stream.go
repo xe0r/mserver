@@ -9,11 +9,6 @@ import (
 	"strconv"
 )
 
-const (
-	FFMPEG  = `C:\Soft\ffmpeg\bin\ffmpeg.exe`
-	FFPROBE = `C:\Soft\ffmpeg\bin\ffprobe.exe`
-)
-
 type StreamInfo struct {
 	Index  int    `json:"index"`
 	Type   string `json:"codec_type"`
@@ -33,8 +28,8 @@ type FileInfo struct {
 	Streams []StreamInfo `json:"streams"`
 }
 
-func getFileInfo(path string) (fi FileInfo, err error) {
-	cmd := exec.Command(FFPROBE,
+func (ms *MediaServer) getFileInfo(path string) (fi FileInfo, err error) {
+	cmd := exec.Command(ms.Config.Ffprobe,
 		path,
 		"-of", "json",
 		"-v", "quiet",
@@ -112,7 +107,7 @@ func (ms *MediaServer) handleVideo(w http.ResponseWriter, req *http.Request) {
 	fmt.Println("args:", args)
 
 	cmd := exec.Command(
-		FFMPEG,
+		ms.Config.Ffmpeg,
 		args...)
 
 	so, _ := cmd.StdoutPipe()
@@ -171,7 +166,7 @@ func (ms *MediaServer) handleInfo(w http.ResponseWriter, req *http.Request) {
 	fmt.Println(req)
 	w.Header().Add("Content-type", "text/json")
 	w.WriteHeader(200)
-	fi, err := getFileInfo(path)
+	fi, err := ms.getFileInfo(path)
 	if err != nil {
 		fmt.Fprint(w, `{"error": true}`, err)
 	} else {

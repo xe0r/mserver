@@ -3,5 +3,7 @@
   "dirs": [
     {"name": "D", "path": "D:\\Video"},
     {"name": "E", "path": "E:\\Video"}
-  ]
+  ],
+  "ffmpeg": "ffmpeg.exe",
+  "ffprobe": "ffprobe.exe"
 }
